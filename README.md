@@ -779,4 +779,4 @@ MIT License - see LICENSE file for details
 
 ---
 
-Built with ❤️ on Sui for HackMoney 2025
+Built with ❤️ on Sui for HackMoney 2026
