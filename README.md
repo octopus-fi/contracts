@@ -802,10 +802,9 @@ MIT License - see LICENSE file for details
 
 
 ### Demo & Links
-- **Demo Video**: [YouTube](https://youtube.com/watch?v=..)
+- **Demo Video**: [YouTube](https://www.youtube.com/watch?v=GZ7HNIlw2QM)
 - **Live Demo**: [octopus.finance](https://octopus-fi.vercel.app/)
 - **GitHub**: [github.com/octopus-finance](https://github.com/octopus-fi)
-- **Documentation**: [docs.octopus.finance](https://docs.octopus.finance)
 
 
 ---
