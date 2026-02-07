@@ -19,7 +19,7 @@ Octopus provides:
 - **AI Vault Manager**: Autonomous agent that rebalances vaults 24/7, prevents liquidations, compounds rewards
 - **AI Liquidation Keepers**: Flash-liquidate unhealthy vaults with ML-predicted timing, ensuring protocol solvency
 - **Walrus Strategy Marketplace**: Clone proven vault strategies with verifiable track records stored on Walrus
-- **Natural Language Interface**: Manage vaults through chat using Claude API ("borrow $2000 safely")
+- **Natural Language Interface**: Manage vaults through chat using Gemini API ("borrow $2000 safely")
 
 ## 🏗️ Architecture
 
