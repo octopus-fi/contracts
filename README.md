@@ -123,14 +123,14 @@ graph TB
 
 | Contract | Package ID | Sui Explorer |
 |----------|-----------|--------------|
-| LiquidStaking | `0x...` | [View](https://suiscan.xyz/testnet/object/0x...) |
-| VaultManager | `0x...` | [View](https://suiscan.xyz/testnet/object/0x...) |
-| Liquidation | `0x...` | [View](https://suiscan.xyz/testnet/object/0x...) |
-| OracleAdapter | `0x...` | [View](https://suiscan.xyz/testnet/object/0x...) |
-| AIAdapter | `0x...` | [View](https://suiscan.xyz/testnet/object/0x...) |
-| StrategyRegistry | `0x...` | [View](https://suiscan.xyz/testnet/object/0x...) |
-| octSUI Token | `0x...` | [View](https://suiscan.xyz/testnet/object/0x...) |
-| octUSD Token | `0x...` | [View](https://suiscan.xyz/testnet/object/0x...) |
+| LiquidStaking | `0xddd35c717bc2c8bf9506e5a57b8cf1da2263060db52f0c9c9661abbbffa5b30e` | [View](https://suiscan.xyz/testnet/object/0xddd35c717bc2c8bf9506e5a57b8cf1da2263060db52f0c9c9661abbbffa5b30e) |
+| VaultManager | `0xec030da9ebdf75f3b7bb2250bf8c7bed4cd02ce7c3d4b187b4a94990a948fac0` | [View](https://suiscan.xyz/testnet/object/0xec030da9ebdf75f3b7bb2250bf8c7bed4cd02ce7c3d4b187b4a94990a948fac0) |
+| Liquidation | `0x59219e7a89f333f63e7fa6ccabddfe58cc7e0f0900072b37f15d7d5374b2cc69` | [View](https://suiscan.xyz/testnet/object/0x59219e7a89f333f63e7fa6ccabddfe58cc7e0f0900072b37f15d7d5374b2cc69) |
+| OracleAdapter | `0x0c0320b4666df2f0831f43c6a3b982356d56763be26464650fa9d081f206a3f0` | [View](https://suiscan.xyz/testnet/object/0x0c0320b4666df2f0831f43c6a3b982356d56763be26464650fa9d081f206a3f0) |
+| AIAdapter | `0x0d0470eaa28a8834e696732d01f5bd68f6e382c36c3c7a94e3006d1a49beb926` | [View](https://suiscan.xyz/testnet/account/0x0d0470eaa28a8834e696732d01f5bd68f6e382c36c3c7a94e3006d1a49beb926) |
+| StrategyRegistry | `0xb3f9f5f94d21f593464a00110b93d34ba5484f883c808197994b70edd03ca928` | [View](https://suiscan.xyz/testnet/object/0xb3f9f5f94d21f593464a00110b93d34ba5484f883c808197994b70edd03ca928) |
+| octSUI Token | `0x59219e7a89f333f63e7fa6ccabddfe58cc7e0f0900072b37f15d7d5374b2cc69::octsui::OCTSUI` | [View](https://suiscan.xyz/testnet/coin/0x59219e7a89f333f63e7fa6ccabddfe58cc7e0f0900072b37f15d7d5374b2cc69::octsui::OCTSUI) |
+| octUSD Token | `0x59219e7a89f333f63e7fa6ccabddfe58cc7e0f0900072b37f15d7d5374b2cc69::octusd::OCTUSD` | [View](https://suiscan.xyz/testnet/coin/0x59219e7a89f333f63e7fa6ccabddfe58cc7e0f0900072b37f15d7d5374b2cc69::octusd::OCTUSD) |
 
 ## 📝 Project Structure
 
