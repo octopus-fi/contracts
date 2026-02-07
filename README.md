@@ -768,7 +768,7 @@ MIT License - see LICENSE file for details
 
 ## 🏆 Hackathon Submission
 
-**HackMoney 2025**
+**HackMoney 2026**
 
 ### Sponsers Targeted
 - SUI
