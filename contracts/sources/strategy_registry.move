@@ -1,83 +1,87 @@
 module octopus_finance::strategy_registry;
 
-use std::string::{Self, String};
+use std::string::String;
 use sui::event;
-use sui::object::{Self, UID, ID};
-use sui::transfer;
-use sui::tx_context::{Self, TxContext};
+use sui::table::{Self, Table};
 
-// Error codes
-const E_STRATEGY_ALREADY_EXISTS: u64 = 0;
+// =================== Errors ===================
+const EStrategyAlreadyExists: u64 = 0;
+const EStrategyNotFound: u64 = 1;
 
-/// Event emitted when a new strategy is registered
+// =================== Structs ===================
+
+/// The Registry shared object
+public struct StrategyRegistry has key, store {
+    id: UID,
+    /// Map: Strategy Name -> Walrus Blob ID
+    strategies: Table<String, String>,
+}
+
+/// Admin Capability (to register strategies)
+public struct RegistryAdminCap has key, store {
+    id: UID,
+}
+
+// =================== Events ===================
+
 public struct StrategyRegistered has copy, drop {
-    id: ID,
     name: String,
     blob_id: String,
 }
 
-/// Represents a verified strategy stored on Walrus
-public struct VaultStrategy has key, store {
-    id: UID,
-    name: String,
-    creator: address,
-    /// The Walrus Blob ID where the full strategy JSON/code is stored
-    /// The contract doesn't need the data, it just points to it.
-    blob_id: String,
-    /// On-chain metadata for quick filtering
-    risk_score: u8,
-    apy_bps: u64,
-}
-
-/// Registry to track all strategies (shared object)
-public struct Registry has key {
-    id: UID,
-    // In a real app, we might use a Table or Bag here
-    // For simplicity/hackathon, we'll just emit events and let indexers track
-}
+// =================== Init ===================
 
 fun init(ctx: &mut TxContext) {
-    transfer::share_object(Registry {
+    let registry = StrategyRegistry {
         id: object::new(ctx),
+        strategies: table::new(ctx),
+    };
+
+    let admin_cap = RegistryAdminCap {
+        id: object::new(ctx),
+    };
+
+    transfer::share_object(registry);
+    transfer::transfer(admin_cap, tx_context::sender(ctx));
+}
+
+// =================== Admin Functions ===================
+
+public entry fun register_strategy(
+    _: &RegistryAdminCap,
+    registry: &mut StrategyRegistry,
+    name: String,
+    blob_id: String,
+) {
+    if (table::contains(&registry.strategies, name)) {
+        // Update existing
+        let current_id = table::borrow_mut(&mut registry.strategies, name);
+        *current_id = blob_id;
+    } else {
+        // Add newcomer
+        table::add(&mut registry.strategies, name, blob_id);
+    };
+
+    event::emit(StrategyRegistered {
+        name,
+        blob_id,
     });
 }
+
+// =================== Public View Functions ===================
+
+public fun get_strategy_blob_id(registry: &StrategyRegistry, name: String): String {
+    assert!(table::contains(&registry.strategies, name), EStrategyNotFound);
+    *table::borrow(&registry.strategies, name)
+}
+
+public fun has_strategy(registry: &StrategyRegistry, name: String): bool {
+    table::contains(&registry.strategies, name)
+}
+
+// =================== Test Helpers ===================
 
 #[test_only]
 public fun init_for_testing(ctx: &mut TxContext) {
     init(ctx);
-}
-
-/// Register a new strategy.
-/// The user must have ALREADY uploaded the strategy to Walrus and got the `blob_id`.
-public entry fun register_strategy(
-    _registry: &mut Registry, // Not strictly used in this simple version but good for future
-    name: vector<u8>,
-    blob_id: vector<u8>,
-    risk_score: u8,
-    apy_bps: u64,
-    ctx: &mut TxContext,
-) {
-    let id = object::new(ctx);
-    let strategy_id = object::uid_to_inner(&id);
-    let name_str = string::utf8(name);
-    let blob_str = string::utf8(blob_id);
-
-    let strategy = VaultStrategy {
-        id,
-        name: name_str,
-        creator: tx_context::sender(ctx),
-        blob_id: blob_str,
-        risk_score,
-        apy_bps,
-    };
-
-    // Emit event so frontend can find it
-    event::emit(StrategyRegistered {
-        id: strategy_id,
-        name: strategy.name,
-        blob_id: strategy.blob_id,
-    });
-
-    // Make the strategy object public/shared so anyone can verify it
-    transfer::public_share_object(strategy);
 }
